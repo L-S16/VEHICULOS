@@ -1,5 +1,5 @@
 import React from 'react';
-import { Database, Car, Activity, Users, Shield } from 'lucide-react';
+import { Database, Car, Activity, Users } from 'lucide-react';
 
 export default function Sidebar({ currentSection, setCurrentSection, activeRole, currentUser }) {
   // Navigation menu items definition
@@ -38,14 +38,16 @@ export default function Sidebar({ currentSection, setCurrentSection, activeRole,
 
   return (
     <aside className="sidebar">
-      {/* Brand Header */}
+      {/* Brand Header with New AI Generated Logo */}
       <div className="brand-logo">
-        <div className="brand-icon-wrapper">
-          <Shield size={20} />
-        </div>
+        <img
+          src="/logo.png"
+          alt="Control Vehículos"
+          style={{ width: '42px', height: '42px', borderRadius: '12px', objectFit: 'cover', boxShadow: '0 4px 10px rgba(0,0,0,0.15)' }}
+        />
         <div className="brand-info">
-          <span className="brand-title">InfoVault</span>
-          <span className="brand-subtitle">Gestión de información</span>
+          <span className="brand-title">Control Vehículos</span>
+          <span className="brand-subtitle">Gestión e información</span>
         </div>
       </div>
 

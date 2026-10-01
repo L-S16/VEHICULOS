@@ -75,10 +75,12 @@ export default function Login({ onLogin, onRegister, users }) {
       <div className="login-card">
         {/* Logo Brand Header */}
         <div className="login-brand-header">
-          <div className="login-logo-icon">
-            <Shield size={28} />
-          </div>
-          <h2>InfoVault</h2>
+          <img
+            src="/logo.png"
+            alt="Control Vehículos"
+            style={{ width: '68px', height: '68px', borderRadius: '18px', objectFit: 'cover', marginBottom: '12px', boxShadow: '0 8px 24px rgba(0,0,0,0.25)' }}
+          />
+          <h2>Control Vehículos</h2>
           <p>{isRegistering ? 'Registro de Nuevo Usuario' : 'Gestión de información y control vehicular'}</p>
         </div>
 
