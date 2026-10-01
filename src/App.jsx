@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
+import Login from './components/Login';
 import RegistrosSection from './components/RegistrosSection';
 import VehiculosSection from './components/VehiculosSection';
 import ActividadSection from './components/ActividadSection';
@@ -14,13 +15,9 @@ import {
 } from './data/initialData';
 
 export default function App() {
-  // Persistence state hooks using localStorage
-  const [activeRole, setActiveRole] = useState(() => {
-    return localStorage.getItem('infovault_active_role') || 'superadmin';
-  });
-
-  const [currentSection, setCurrentSection] = useState(() => {
-    return localStorage.getItem('infovault_current_section') || 'vehiculos';
+  // Login Authentication State
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return localStorage.getItem('infovault_authenticated') === 'true';
   });
 
   const [users, setUsers] = useState(() => {
@@ -28,10 +25,22 @@ export default function App() {
     return saved ? JSON.parse(saved) : INITIAL_USERS;
   });
 
+  const [activeRole, setActiveRole] = useState(() => {
+    return localStorage.getItem('infovault_active_role') || 'superadmin';
+  });
+
   const [currentUser, setCurrentUser] = useState(() => {
-    const savedRole = localStorage.getItem('infovault_active_role') || 'superadmin';
-    const found = users.find(u => u.role === savedRole);
-    return found || users[0];
+    const savedUserId = localStorage.getItem('infovault_current_user_id');
+    if (savedUserId) {
+      const found = users.find(u => u.id === savedUserId);
+      if (found) return found;
+    }
+    const foundRole = users.find(u => u.role === activeRole);
+    return foundRole || users[0];
+  });
+
+  const [currentSection, setCurrentSection] = useState(() => {
+    return localStorage.getItem('infovault_current_section') || 'vehiculos';
   });
 
   const [records, setRecords] = useState(() => {
@@ -49,10 +58,20 @@ export default function App() {
     return saved ? JSON.parse(saved) : INITIAL_ACTIVIDAD;
   });
 
-  // Sync to localStorage
+  // Sync state to localStorage
+  useEffect(() => {
+    localStorage.setItem('infovault_authenticated', isAuthenticated);
+  }, [isAuthenticated]);
+
   useEffect(() => {
     localStorage.setItem('infovault_active_role', activeRole);
   }, [activeRole]);
+
+  useEffect(() => {
+    if (currentUser) {
+      localStorage.setItem('infovault_current_user_id', currentUser.id);
+    }
+  }, [currentUser]);
 
   useEffect(() => {
     localStorage.setItem('infovault_current_section', currentSection);
@@ -81,7 +100,7 @@ export default function App() {
     }
   }, [activeRole, currentSection]);
 
-  // Helper to add audit trail log
+  // Helper to add audit log
   const handleAddActivity = (event) => {
     const newLog = {
       id: `act-${Date.now()}`,
@@ -95,6 +114,37 @@ export default function App() {
     setActivityLogs(prev => [newLog, ...prev]);
   };
 
+  // Login handler
+  const handleLogin = (user) => {
+    setCurrentUser(user);
+    setActiveRole(user.role);
+    setIsAuthenticated(true);
+
+    if (user.role === 'usuario') {
+      setCurrentSection('registros');
+    } else {
+      setCurrentSection('vehiculos');
+    }
+
+    handleAddActivity({
+      action: 'Inicio de Sesión',
+      details: `Usuario ${user.name} iniciós sesión con rol ${user.roleLabel || user.role}`,
+      type: 'sistema'
+    });
+  };
+
+  // Logout handler
+  const handleLogout = () => {
+    handleAddActivity({
+      action: 'Cierre de Sesión',
+      details: `Usuario ${currentUser?.name || 'Usuario'} cerró sesión`,
+      type: 'sistema'
+    });
+
+    setIsAuthenticated(false);
+    localStorage.removeItem('infovault_authenticated');
+  };
+
   // Reset demo data handler
   const handleResetDemoData = () => {
     if (window.confirm('¿Desea restablecer todos los datos de demostración a su estado inicial?')) {
@@ -106,8 +156,14 @@ export default function App() {
       setActiveRole('superadmin');
       setCurrentSection('vehiculos');
       setCurrentUser(INITIAL_USERS[0]);
+      setIsAuthenticated(true);
     }
   };
+
+  // Render Login screen if not authenticated
+  if (!isAuthenticated) {
+    return <Login onLogin={handleLogin} users={users} />;
+  }
 
   return (
     <div className="app-container">
@@ -128,6 +184,7 @@ export default function App() {
           setCurrentUser={setCurrentUser}
           allUsers={users}
           onResetDemoData={handleResetDemoData}
+          onLogout={handleLogout}
         />
 
         {/* Section View Renderer */}

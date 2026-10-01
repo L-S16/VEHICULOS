@@ -858,3 +858,237 @@ textarea.form-control {
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
 }
+
+/* ==========================================================================
+   Login Screen Styles
+   ========================================================================== */
+.login-screen-wrapper {
+  min-height: 100vh;
+  width: 100vw;
+  background: linear-gradient(135deg, #09090b 0%, #18181b 50%, #0f172a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-screen-wrapper::before {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
+  top: -100px;
+  left: -100px;
+  pointer-events: none;
+}
+
+.login-card {
+  background-color: #ffffff;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 460px;
+  padding: 36px 32px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  z-index: 10;
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.login-brand-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-logo-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  background-color: #18181b;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.login-brand-header h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  margin-bottom: 2px;
+}
+
+.login-brand-header p {
+  font-size: 0.88rem;
+  color: #64748b;
+}
+
+.login-error-alert {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.input-icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.field-icon {
+  position: absolute;
+  left: 14px;
+  color: #94a3b8;
+  pointer-events: none;
+}
+
+.form-control.with-icon {
+  padding-left: 42px;
+  padding-right: 42px;
+}
+
+.toggle-password-btn {
+  position: absolute;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+}
+
+.toggle-password-btn:hover {
+  color: #0f172a;
+}
+
+.btn-login {
+  width: 100%;
+  padding: 12px;
+  font-size: 0.95rem;
+  margin-top: 4px;
+  border-radius: 12px;
+}
+
+/* Quick Access Buttons */
+.quick-access-section {
+  padding-top: 20px;
+  border-top: 1px solid #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.quick-access-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.quick-buttons-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quick-role-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  background-color: #f8fafc;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.quick-role-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.quick-role-btn.admin-btn:hover {
+  border-color: #c084fc;
+  background-color: #faf5ff;
+}
+
+.quick-role-btn.user-btn:hover {
+  border-color: #6ee7b7;
+  background-color: #ecfdf5;
+}
+
+.role-btn-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-btn .role-icon {
+  color: #7c3aed;
+}
+
+.user-btn .role-icon {
+  color: #059669;
+}
+
+.role-btn-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.role-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.user-email {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.badge-perm {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 9999px;
+}
+
+.admin-btn .badge-perm {
+  background-color: #f3e8ff;
+  color: #7c3aed;
+}
+
+.user-btn .badge-perm {
+  background-color: #d1fae5;
+  color: #047857;
+}
+

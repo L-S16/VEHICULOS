@@ -1,10 +1,9 @@
 import React from 'react';
-import { Crown, UserCheck, RefreshCw, Sparkles } from 'lucide-react';
+import { Crown, UserCheck, RefreshCw, Sparkles, LogOut } from 'lucide-react';
 
-export default function Header({ activeRole, setActiveRole, currentUser, setCurrentUser, allUsers, onResetDemoData }) {
+export default function Header({ activeRole, setActiveRole, currentUser, setCurrentUser, allUsers, onResetDemoData, onLogout }) {
   const handleRoleChange = (roleKey) => {
     setActiveRole(roleKey);
-    // Find matching user from system list
     const foundUser = allUsers.find(u => u.role === roleKey);
     if (foundUser) {
       setCurrentUser(foundUser);
@@ -14,7 +13,7 @@ export default function Header({ activeRole, setActiveRole, currentUser, setCurr
   return (
     <header className="top-header">
       <div className="header-left">
-        {/* Role Switcher pill controls for testing */}
+        {/* Role Switcher controls for quick testing */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#64748b', display: 'flex', alignItems: 'center', gap: '4px' }}>
             <Sparkles size={14} style={{ color: '#f59e0b' }} /> Modo Vista:
@@ -60,6 +59,15 @@ export default function Header({ activeRole, setActiveRole, currentUser, setCurr
         }}>
           {activeRole === 'superadmin' ? '👑 Acceso Total (4 apartados)' : '👤 Acceso Usuario (2 apartados)'}
         </div>
+
+        <button
+          onClick={onLogout}
+          className="btn btn-danger btn-sm"
+          title="Cerrar sesión actual"
+        >
+          <LogOut size={14} />
+          <span>Cerrar Sesión</span>
+        </button>
       </div>
     </header>
   );
