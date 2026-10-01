@@ -9,6 +9,18 @@ export default function VehiculosSection({ vehicles, setVehicles, onAddActivity,
   const [editingVehicle, setEditingVehicle] = useState(null);
   const [viewingVehicle, setViewingVehicle] = useState(null);
 
+  const getBadgeClass = (status) => {
+    if (!status) return 'badge-category';
+    const s = status.toLowerCase();
+    if (s.includes('detenido')) return 'badge-detenido';
+    if (s.includes('liberado')) return 'badge-liberado';
+    if (s.includes('retenc')) return 'badge-retencion';
+    if (s.includes('inspecc')) return 'badge-inspeccion';
+    if (s.includes('activo')) return 'badge-activo';
+    if (s.includes('pendiente')) return 'badge-pendiente';
+    return 'badge-category';
+  };
+
   // Filter vehicles
   const filteredVehicles = vehicles.filter(v => {
     const matchesSearch =
@@ -129,7 +141,7 @@ export default function VehiculosSection({ vehicles, setVehicles, onAddActivity,
                   alt={veh.plates}
                   className="vehicle-card-img"
                 />
-                <span className={`badge badge-${veh.status.toLowerCase().replace(' ', '')}`} style={{ position: 'absolute', top: '12px', right: '12px', boxShadow: '0 2px 6px rgba(0,0,0,0.15)' }}>
+                <span className={`badge ${getBadgeClass(veh.status)}`} style={{ position: 'absolute', top: '12px', right: '12px', zIndex: 5, boxShadow: '0 2px 8px rgba(0,0,0,0.18)' }}>
                   {veh.status}
                 </span>
               </div>
