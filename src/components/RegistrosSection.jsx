@@ -79,6 +79,18 @@ export default function RegistrosSection({ records, setRecords, onAddActivity, c
     });
   };
 
+  const getBadgeClass = (status) => {
+    if (!status) return 'badge-category';
+    const s = status.toLowerCase();
+    if (s.includes('activo')) return 'badge-activo';
+    if (s.includes('pendiente')) return 'badge-pendiente';
+    if (s.includes('detenido')) return 'badge-detenido';
+    if (s.includes('liberado')) return 'badge-liberado';
+    if (s.includes('retenc')) return 'badge-retencion';
+    if (s.includes('inspecc')) return 'badge-inspeccion';
+    return 'badge-category';
+  };
+
   return (
     <div className="page-container">
       {/* Page Header matching Screenshot 2 */}
@@ -152,7 +164,7 @@ export default function RegistrosSection({ records, setRecords, onAddActivity, c
             <div key={rec.id} className="record-card">
               <div className="record-header">
                 <h3 className="record-title">{rec.title}</h3>
-                <span className={`badge badge-${rec.status.toLowerCase()}`}>
+                <span className={`badge ${getBadgeClass(rec.status)}`}>
                   {rec.status}
                 </span>
               </div>

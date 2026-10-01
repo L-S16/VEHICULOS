@@ -544,30 +544,42 @@ body {
   background-color: #ecfdf5;
   color: #047857;
   border: 1px solid #a7f3d0;
+  font-weight: 700;
 }
 
 .badge-pendiente {
   background-color: #fffbeb;
   color: #b45309;
   border: 1px solid #fde68a;
+  font-weight: 700;
 }
 
 .badge-detenido {
   background-color: #fef2f2;
   color: #b91c1c;
   border: 1px solid #fecaca;
+  font-weight: 700;
 }
 
 .badge-liberado {
   background-color: #f0fdf4;
   color: #15803d;
   border: 1px solid #bbf7d0;
+  font-weight: 700;
 }
 
 .badge-retencion {
   background-color: #eff6ff;
   color: #1d4ed8;
   border: 1px solid #bfdbfe;
+  font-weight: 700;
+}
+
+.badge-inspeccion {
+  background-color: #fff7ed;
+  color: #c2410c;
+  border: 1px solid #ffedd5;
+  font-weight: 700;
 }
 
 .badge-category {
