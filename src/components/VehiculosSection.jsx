@@ -163,20 +163,24 @@ export default function VehiculosSection({ vehicles, setVehicles, onAddActivity,
                     >
                       <Eye size={14} />
                     </button>
-                    <button
-                      onClick={() => { setEditingVehicle(veh); setIsModalOpen(true); }}
-                      className="btn btn-secondary btn-sm"
-                      title="Editar registro"
-                    >
-                      <Edit3 size={14} />
-                    </button>
-                    <button
-                      onClick={() => handleDeleteVehicle(veh.id, veh.plates, veh.owner)}
-                      className="btn btn-danger btn-sm"
-                      title="Eliminar registro"
-                    >
-                      <Trash2 size={14} />
-                    </button>
+                    {activeRole === 'superadmin' && (
+                      <>
+                        <button
+                          onClick={() => { setEditingVehicle(veh); setIsModalOpen(true); }}
+                          className="btn btn-secondary btn-sm"
+                          title="Editar registro"
+                        >
+                          <Edit3 size={14} />
+                        </button>
+                        <button
+                          onClick={() => handleDeleteVehicle(veh.id, veh.plates, veh.owner)}
+                          className="btn btn-danger btn-sm"
+                          title="Eliminar registro"
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>

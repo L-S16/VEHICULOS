@@ -215,20 +215,24 @@ export default function RegistrosSection({ records, setRecords, onAddActivity, c
                   >
                     <Eye size={14} />
                   </button>
-                  <button
-                    onClick={() => { setEditingRecord(rec); setIsModalOpen(true); }}
-                    className="btn btn-secondary btn-sm"
-                    title="Editar registro"
-                  >
-                    <Edit3 size={14} />
-                  </button>
-                  <button
-                    onClick={() => handleDeleteRecord(rec.id, rec.title)}
-                    className="btn btn-danger btn-sm"
-                    title="Eliminar registro"
-                  >
-                    <Trash2 size={14} />
-                  </button>
+                  {activeRole === 'superadmin' && (
+                    <>
+                      <button
+                        onClick={() => { setEditingRecord(rec); setIsModalOpen(true); }}
+                        className="btn btn-secondary btn-sm"
+                        title="Editar registro"
+                      >
+                        <Edit3 size={14} />
+                      </button>
+                      <button
+                        onClick={() => handleDeleteRecord(rec.id, rec.title)}
+                        className="btn btn-danger btn-sm"
+                        title="Eliminar registro"
+                      >
+                        <Trash2 size={14} />
+                      </button>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
