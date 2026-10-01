@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Shield, Lock, Mail, Eye, EyeOff, Crown, User, ArrowRight, AlertCircle } from 'lucide-react';
+import { Shield, Lock, Mail, Eye, EyeOff, ArrowRight, AlertCircle } from 'lucide-react';
 
 export default function Login({ onLogin, users }) {
   const [email, setEmail] = useState('');
@@ -32,15 +32,6 @@ export default function Login({ onLogin, users }) {
 
     // Success login
     onLogin(foundUser);
-  };
-
-  const handleQuickLogin = (roleKey) => {
-    const userToLogin = users.find(u => u.role === roleKey && u.status === 'Activo');
-    if (userToLogin) {
-      setEmail(userToLogin.email);
-      setPassword(userToLogin.password || 'admin123');
-      onLogin(userToLogin);
-    }
   };
 
   return (
@@ -107,43 +98,6 @@ export default function Login({ onLogin, users }) {
             <ArrowRight size={18} />
           </button>
         </form>
-
-        {/* Quick Demo Access Section */}
-        <div className="quick-access-section">
-          <span className="quick-access-title">Ingreso Rápido de Demostración:</span>
-
-          <div className="quick-buttons-grid">
-            <button
-              type="button"
-              className="quick-role-btn admin-btn"
-              onClick={() => handleQuickLogin('superadmin')}
-            >
-              <div className="role-btn-content">
-                <Crown size={18} className="role-icon" />
-                <div className="role-btn-text">
-                  <span className="role-name">Super Administrador</span>
-                  <span className="user-email">oscar.malitasig@infovault.gob.ec</span>
-                </div>
-              </div>
-              <span className="badge-perm">4 apartados</span>
-            </button>
-
-            <button
-              type="button"
-              className="quick-role-btn user-btn"
-              onClick={() => handleQuickLogin('usuario')}
-            >
-              <div className="role-btn-content">
-                <User size={18} className="role-icon" />
-                <div className="role-btn-text">
-                  <span className="role-name">Usuario Estándar</span>
-                  <span className="user-email">carlos.perez@infovault.gob.ec</span>
-                </div>
-              </div>
-              <span className="badge-perm">2 apartados</span>
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   );
