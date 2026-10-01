@@ -1,6 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { X, Upload, Trash2 } from 'lucide-react';
 
+const COLORES = [
+  { nombre: 'Blanco', hex: '#FFFFFF' },
+  { nombre: 'Negro', hex: '#111111' },
+  { nombre: 'Gris', hex: '#808080' },
+  { nombre: 'Plateado', hex: '#C0C0C0' },
+  { nombre: 'Rojo', hex: '#DC2626' },
+  { nombre: 'Vino', hex: '#7F1D1D' },
+  { nombre: 'Naranja', hex: '#F97316' },
+  { nombre: 'Amarillo', hex: '#FACC15' },
+  { nombre: 'Dorado', hex: '#CA8A04' },
+  { nombre: 'Beige', hex: '#D6C3A1' },
+  { nombre: 'Crema', hex: '#FFF3D6' },
+  { nombre: 'Café', hex: '#78350F' },
+  { nombre: 'Verde', hex: '#16A34A' },
+  { nombre: 'Turquesa', hex: '#14B8A6' },
+  { nombre: 'Celeste', hex: '#38BDF8' },
+  { nombre: 'Azul', hex: '#2563EB' },
+  { nombre: 'Morado', hex: '#7C3AED' },
+  { nombre: 'Rosado', hex: '#EC4899' }
+];
+
 export default function NuevoVehiculoModal({ isOpen, onClose, onSave, editingVehicle }) {
   const [owner, setOwner] = useState('');
   const [vehicleType, setVehicleType] = useState('');
@@ -153,21 +174,35 @@ export default function NuevoVehiculoModal({ isOpen, onClose, onSave, editingVeh
 
               <div className="form-group">
                 <label className="form-label">Color</label>
-                <select
-                  className="form-control"
-                  value={color}
-                  onChange={e => setColor(e.target.value)}
-                >
-                  <option value="">Selecciona un color</option>
-                  <option value="Rojo">Rojo</option>
-                  <option value="Blanco">Blanco</option>
-                  <option value="Negro">Negro</option>
-                  <option value="Gris">Gris</option>
-                  <option value="Azul">Azul</option>
-                  <option value="Verde">Verde</option>
-                  <option value="Amarillo">Amarillo</option>
-                  <option value="Otro">Otro</option>
-                </select>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', alignItems: 'center' }}>
+  {COLORES.map(c => (
+    <button
+      type="button"
+      key={c.nombre}
+      title={c.nombre}
+      onClick={() => setColor(c.nombre)}
+      style={{
+        width: '32px',
+        height: '32px',
+        borderRadius: '50%',
+        background: c.hex,
+        cursor: 'pointer',
+        border: color === c.nombre ? '3px solid #0f172a' : '2px solid #cbd5e1',
+        boxShadow: color === c.nombre ? '0 0 0 2px #fff inset' : 'none'
+      }}
+    />
+  ))}
+  <input
+    type="color"
+    title="Otro color"
+    value={/^#/.test(color) ? color : '#888888'}
+    onChange={e => setColor(e.target.value)}
+    style={{ width: '36px', height: '36px', border: 'none', background: 'none', cursor: 'pointer' }}
+  />
+</div>
+<span style={{ fontSize: '0.8rem', color: '#64748b' }}>
+  Seleccionado: {color || 'ninguno'}
+</span>
               </div>
             </div>
 
