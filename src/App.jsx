@@ -160,9 +160,30 @@ export default function App() {
     }
   };
 
+  // Registration handler
+  const handleRegister = (newUser) => {
+    setUsers(prev => [...prev, newUser]);
+    setCurrentUser(newUser);
+    setActiveRole(newUser.role);
+    setIsAuthenticated(true);
+    setCurrentSection('registros');
+
+    // Add activity log visible to Super Admin
+    const newLog = {
+      id: `act-${Date.now()}`,
+      user: newUser.name,
+      userRole: 'Usuario',
+      action: 'Auto-Registro de Usuario',
+      details: `El nuevo usuario "${newUser.name}" (${newUser.email}) se registró desde la pantalla de Inicio de Sesión.`,
+      timestamp: new Date().toISOString().replace('T', ' ').substring(0, 19),
+      type: 'sistema'
+    };
+    setActivityLogs(prev => [newLog, ...prev]);
+  };
+
   // Render Login screen if not authenticated
   if (!isAuthenticated) {
-    return <Login onLogin={handleLogin} users={users} />;
+    return <Login onLogin={handleLogin} onRegister={handleRegister} users={users} />;
   }
 
   return (
