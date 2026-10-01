@@ -135,14 +135,41 @@ export default function Login({ onLogin, onRegister, users }) {
               <ArrowRight size={18} />
             </button>
 
-            <div style={{ textAlign: 'center', marginTop: '12px' }}>
+            {/* Prominent Register Button */}
+            <div style={{
+              marginTop: '16px',
+              paddingTop: '16px',
+              borderTop: '1px solid #f1f5f9',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '10px'
+            }}>
+              <span style={{ fontSize: '0.85rem', color: '#64748b' }}>
+                ¿No tienes una cuenta registrada?
+              </span>
               <button
                 type="button"
                 className="btn btn-secondary"
-                style={{ width: '100%', gap: '8px' }}
-                onClick={() => { setErrorMessage(''); setIsRegistering(true); }}
+                style={{
+                  width: '100%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  padding: '10px 16px',
+                  borderRadius: '10px',
+                  fontWeight: 600
+                }}
+                onClick={() => {
+                  setErrorMessage('');
+                  setEmail('');
+                  setPassword('');
+                  setName('');
+                  setIsRegistering(true);
+                }}
               >
-                <UserPlus size={16} />
+                <UserPlus size={16} style={{ color: '#0f172a' }} />
                 <span>Registrar Nuevo Usuario</span>
               </button>
             </div>
@@ -206,12 +233,38 @@ export default function Login({ onLogin, onRegister, users }) {
               <span>Crear Cuenta</span>
             </button>
 
-            <div style={{ textAlign: 'center', marginTop: '12px' }}>
+            <div style={{
+              marginTop: '16px',
+              paddingTop: '16px',
+              borderTop: '1px solid #f1f5f9',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '10px'
+            }}>
+              <span style={{ fontSize: '0.85rem', color: '#64748b' }}>
+                ¿Ya tienes una cuenta registrada?
+              </span>
               <button
                 type="button"
                 className="btn btn-secondary"
-                style={{ width: '100%' }}
-                onClick={() => { setErrorMessage(''); setIsRegistering(false); }}
+                style={{
+                  width: '100%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  padding: '10px 16px',
+                  borderRadius: '10px',
+                  fontWeight: 600
+                }}
+                onClick={() => {
+                  setErrorMessage('');
+                  setEmail('');
+                  setPassword('');
+                  setName('');
+                  setIsRegistering(false);
+                }}
               >
                 <span>Volver a Iniciar Sesión</span>
               </button>
