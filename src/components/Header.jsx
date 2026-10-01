@@ -1,5 +1,5 @@
 import React from 'react';
-import { RefreshCw, LogOut, Shield } from 'lucide-react';
+import { RefreshCw, LogOut } from 'lucide-react';
 
 export default function Header({ activeRole, currentUser, onResetDemoData, onLogout }) {
   return (
@@ -21,18 +21,6 @@ export default function Header({ activeRole, currentUser, onResetDemoData, onLog
           <RefreshCw size={14} />
           <span>Restablecer Datos</span>
         </button>
-
-        <div style={{
-          padding: '6px 12px',
-          borderRadius: '9999px',
-          backgroundColor: activeRole === 'superadmin' ? '#f3e8ff' : '#ecfdf5',
-          color: activeRole === 'superadmin' ? '#6b21a8' : '#047857',
-          fontSize: '0.78rem',
-          fontWeight: 700,
-          border: `1px solid ${activeRole === 'superadmin' ? '#e9d5ff' : '#a7f3d0'}`
-        }}>
-          {activeRole === 'superadmin' ? '👑 Super Administrador (4 apartados)' : '👤 Usuario Estándar (2 apartados)'}
-        </div>
 
         <button
           onClick={onLogout}
