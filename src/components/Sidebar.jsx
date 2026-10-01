@@ -1,5 +1,5 @@
 import React from 'react';
-import { Database, Car, Activity, Users, Shield, Lock } from 'lucide-react';
+import { Database, Car, Activity, Users, Shield } from 'lucide-react';
 
 export default function Sidebar({ currentSection, setCurrentSection, activeRole, currentUser }) {
   // Navigation menu items definition
@@ -66,25 +66,6 @@ export default function Sidebar({ currentSection, setCurrentSection, activeRole,
           );
         })}
       </nav>
-
-      {/* Role Restriction Info Note for Standard Users */}
-      {activeRole === 'usuario' && (
-        <div style={{
-          padding: '12px',
-          backgroundColor: '#f8fafc',
-          borderRadius: '10px',
-          border: '1px solid #e2e8f0',
-          marginBottom: '16px',
-          fontSize: '0.75rem',
-          color: '#64748b',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px'
-        }}>
-          <Lock size={16} style={{ color: '#94a3b8', flexShrink: 0 }} />
-          <span>Acceso limitado a 2 apartados (Registros y Vehículos)</span>
-        </div>
-      )}
 
       {/* Sidebar Footer User Info */}
       <div className="sidebar-user-footer">
